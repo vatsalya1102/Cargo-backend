@@ -10,6 +10,8 @@ const auth = async (req, res, next) => {
             decodedData = jwt.verify(token, 'test');
             req.userId = decodedData?.id;
         } 
+        req.manufacturerName = req.headers.authorization.split(" ")[2];
+        console.log(req.manufacturerName);
         next();
     } catch (error) {
         console.log(error);
