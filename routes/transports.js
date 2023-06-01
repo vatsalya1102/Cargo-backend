@@ -9,6 +9,8 @@ router.post('/', auth, createOrder);
 
 router.get('/:transporter', auth, getOrders);
 
+// router.get('/:manufacturer', auth, getOrdersforManu);
+
 router.patch('/:id', auth, updateOrder); 
 
 export default router;

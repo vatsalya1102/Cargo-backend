@@ -6,7 +6,6 @@ export const createOrder = async (req, res) => {
     const newOrder = new TransportOrder({ ...order.form, manufacturer: req.manufacturerName, price: "" });
     try {
         await newOrder.save();
-        console.log(newOrder);
         res.status(201).json(newOrder);
     } catch (error) {
         res.status(409).json({ message: error.message })
@@ -16,8 +15,7 @@ export const createOrder = async (req, res) => {
 export const getOrders = async (req, res) => {
     try {
         const { transporter: transporter } = req.params;
-        const orders = await TransportOrder.find({ transporter: transporter });
-        console.log(orders);
+        const orders = await TransportOrder.find({ $or:[{transporter: transporter},{manufacturer: transporter}] });
         res.status(200).json(orders);
     } catch (error) {
         res.status(404).json({ message: error.message })
