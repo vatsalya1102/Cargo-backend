@@ -15,7 +15,7 @@ export const createOrder = async (req, res) => {
 export const getOrders = async (req, res) => {
     try {
         const { transporter: transporter } = req.params;
-        const orders = await TransportOrder.find({ $or:[{transporter: transporter},{manufacturer: transporter}] });
+        const orders = await TransportOrder.find({ transporter: transporter });
         res.status(200).json(orders);
     } catch (error) {
         res.status(404).json({ message: error.message })
