@@ -24,6 +24,10 @@ app.use('/user', userRoutes);
 app.use('/transport', transportRoutes);
 app.use('/order', orderRoutes)
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(`${process.env.CONNECTION_URL}`, { useNewUrlParser: true, useUnifiedTopology: true })
